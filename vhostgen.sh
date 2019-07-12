@@ -3,7 +3,7 @@ echo "You have to execute this script as root user"
 exit 1;
 fi
 read -p "Enter the server name your want (e.g. user.website.com) : " servn
-read -p "Enter the path of directory you wanna use (e.g. : /var/www/, dont forg$
+read -p "Enter the path of directory you wanna use (e.g. : /var/www/, dont forget the trailing slash) : " dir
 read -p "Enter the user you wanna use (e.g. : apache) : " usr
 read -p "Enter the listened IP for the server (e.g. : *): " listen
 if ! mkdir -p $dir$servn; then
