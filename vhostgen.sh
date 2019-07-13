@@ -2,13 +2,15 @@ if [ "$(whoami)" != 'root' ]; then
 echo "You have to execute this script as root user"
 exit 1;
 fi
-read -p "Enter the server name your want (e.g. user.website.com) : " servn
+read -p "Enter the server name your want (user.website.com): " servn
 servn=${servn:-user.website.com}
-read -p "Enter the path of directory you wanna use (e.g. /var/www/html/, dont forget the trailing slash) : " dir
+read -p "Enter the path of directory you wanna use. NOTE: Don't forget the trailing slash (/var/www/html/): " dir
 dir=${dir:-/var/www/html/}
-read -p "Enter the user you wanna use (e.g. root) : " usr
+read -p "Enter document root ($dir$servn): " docroot
+docroot=${docroot:-$dir$servn}
+read -p "Enter the user you wanna use (root): " usr
 usr=${usr:-root}
-read -p "Enter the listened IP for the server (e.g. : *): " listen
+read -p "Enter the listened IP for the server (*): " listen
 listen=${listen:-*}
 
 if ! mkdir -p $dir$servn; then
@@ -28,8 +30,8 @@ echo "#### $servn
 <VirtualHost $listen:80>
 ServerName $servn
 ServerAlias $alias
-DocumentRoot $dir$servn
-<Directory $dir$servn>
+DocumentRoot $docroot
+<Directory $docroot>
 Options Indexes FollowSymLinks MultiViews
 AllowOverride All
 Order allow,deny
