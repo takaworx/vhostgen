@@ -3,14 +3,20 @@ echo "You have to execute this script as root user"
 exit 1;
 fi
 read -p "Enter the server name your want (e.g. user.website.com) : " servn
-read -p "Enter the path of directory you wanna use (e.g. : /var/www/, dont forget the trailing slash) : " dir
-read -p "Enter the user you wanna use (e.g. : apache) : " usr
+servn=${servn:-user.website.com}
+read -p "Enter the path of directory you wanna use (e.g. /var/www/html/, dont forget the trailing slash) : " dir
+dir=${dir:-/var/www/html/}
+read -p "Enter the user you wanna use (e.g. root) : " usr
+usr=${usr:-root}
 read -p "Enter the listened IP for the server (e.g. : *): " listen
+listen=${listen:-*}
+
 if ! mkdir -p $dir$servn; then
 echo "Web directory already Exist !"
 else
 echo "Web directory created with success !"
 fi
+
 echo "<?php echo '<h1>$servn</h1>'; ?>" > $dir$servn/index.php
 chown -R $usr:$usr $dir$servn
 chmod -R '755' $dir$servn
