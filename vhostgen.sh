@@ -19,7 +19,7 @@ else
 echo "Web directory created with success !"
 fi
 
-echo "<?php echo '<h1>$servn</h1>'; ?>" > $dir$servn/index.php
+echo "<?php echo '<h1>$servn</h1>'; ?>" > $docroot/index.php
 chown -R $usr:$usr $dir$servn
 chmod -R '755' $dir$servn
 mkdir /var/log/$servn
